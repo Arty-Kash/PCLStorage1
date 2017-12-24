@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="PCLStrg.EditFile">
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="white" >
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" >
+                <Label Text="Tapped File:  " />
+                <Label x:Name="TappedFileName" HeightRequest="25"/>
+            </StackLayout>
+            
+            <!-- Edit File Contents -->
+            <StackLayout BackgroundColor="gray" Padding="1"  Margin="20,0,0,0" 
+                    HorizontalOptions="Start" WidthRequest="300" HeightRequest="300" >
+                <Editor x:Name="FileContent" BackgroundColor="white" 
+                    HorizontalOptions="Start" WidthRequest="300" HeightRequest="300" />
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center" >
+                <!-- Save File -->
+                <Button Margin="20,0,0,0" Text="save" Clicked="SaveFile" 
+                    HorizontalOptions="Start" WidthRequest="60" HeightRequest="30" 
+                    BorderColor="Blue" BorderWidth="1" />
+                <!-- not Save File -->
+                <Button Margin="3,0,0,0" Text="don't save" Clicked="NotSaveFile" 
+                    HorizontalOptions="Start" WidthRequest="100" HeightRequest="30" 
+                    BorderColor="Blue" BorderWidth="1" />
+                <!-- Close File -->
+                <Button Margin="3,0,0,0" Text="close" Clicked="CloseFile" 
+                    HorizontalOptions="Start" WidthRequest="60" HeightRequest="30" 
+                    BorderColor="Blue" BorderWidth="1" />
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

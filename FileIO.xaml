@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="PCLStrg.FileIO" Title="File I/O" Icon="File.png" >
+
+    <ContentPage.Content>
+        <StackLayout Margin="0, 30, 0, 30">
+
+            <Label Text="PCL Storage Folder and File I/O Sample App" />
+            <Label Text="  --- File I/O ---" />
+
+            <!-- Create a new File -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Create New File" Clicked="CreateFile" 
+                    WidthRequest="150" HeightRequest="30" BorderColor="Blue" BorderWidth="1" />
+                <Entry x:Name="EntCreateFile" Placeholder="Input File Name" Keyboard="Text" 
+                    HeightRequest="30" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!-- Check File Existence -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Check File" Clicked="CheckFile" WidthRequest="150" 
+                    HeightRequest="30" BorderColor="Blue" BorderWidth="1" />
+                <Entry x:Name="EntCheckFile" Placeholder="Input File Name" Keyboard="Text" 
+                    HeightRequest="30" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!-- Delete File -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Delete File" Clicked="DeleteFile" WidthRequest="150" 
+                    HeightRequest="30" BorderColor="Blue" BorderWidth="1" />
+                <Entry x:Name="EntDeleteFile" Placeholder="Input File Name" Keyboard="Text" 
+                    HeightRequest="30" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!-- Show All Files -->
+            <Button Text="Show Files" Clicked="GetFiles" HorizontalOptions="Start" 
+                WidthRequest="150" HeightRequest="30" BorderColor="Blue" BorderWidth="1" />
+
+            <!-- Additionally Write Content to File -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Write File" Clicked="WriteFile" WidthRequest="150" 
+                    HeightRequest="30" BorderColor="Blue" BorderWidth="1">
+                    <!-- Enable Button, if EntWriteFile_Content gets text input -->
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" 
+                            Binding="{Binding Source={x:Reference EntWriteFile_Content}, 
+                            Path=Text.Length}" Value="0">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <StackLayout Margin="0, 0, 0, 0">
+                    <Entry x:Name="EntWriteFile_FileName" Text="" Placeholder="Input File Name" 
+                        Keyboard="Text" HeightRequest="30" HorizontalOptions="FillAndExpand" />
+                    <Entry x:Name="EntWriteFile_Content" Text="" Placeholder="Input Text" 
+                        Keyboard="Text" HeightRequest="30" HorizontalOptions="FillAndExpand" >
+                        <!-- Enable Ent_WriteFile_Content, if EntWriteFile_FileName gets text input -->
+                        <Entry.Triggers>
+                            <DataTrigger TargetType="Entry" 
+                                Binding="{Binding Source={x:Reference EntWriteFile_FileName}, 
+                                Path=Text.Length}" Value="0">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                        </Entry.Triggers>
+                    </Entry>
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Read File -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Read File" Clicked="ReadFile" WidthRequest="150" HeightRequest="30" 
+                    BorderColor="Blue" BorderWidth="1" />
+                <Entry x:Name="EntReadFile" Placeholder="Input File Name" Keyboard="Text" 
+                    HeightRequest="30" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+
+            <!-- Display File I/O Results -->
+            <Label Text="  - - - File I/O Results - - -" />
+            <!-- <ListView x:Name="FileIOResult" ItemTapped="TappedResultItem" RowHeight="25"> -->
+            
+
+            <ListView x:Name="FileIOResult" ItemTapped="TappedResultItem" RowHeight="25">
+
+                <!-- Context Actions: MenuItem -->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding .}" />
+                            <ViewCell.ContextActions>
+                                <MenuItem Clicked="MenuEdit" Text="Edit" CommandParameter="{Binding .}" />
+                                <MenuItem Clicked="MenuDelete" Text="Delete" IsDestructive="true" 
+                                                                        CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            <Button Text="Clear Result in the above List" Clicked="ClearFileIOResult" 
+                HorizontalOptions="Center" WidthRequest="250" HeightRequest="30" 
+                BorderColor="Blue" BorderWidth="1" />
+        </StackLayout>
+    </ContentPage.Content>
+
+    <!-- Change color, if Entry is focused -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger  TargetType="Entry" Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="Aqua" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+</ContentPage>
